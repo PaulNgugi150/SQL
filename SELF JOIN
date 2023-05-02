@@ -1,0 +1,73 @@
+use database DEMO_DATABASE;
+CREATE OR REPLACE TABLE AGENTS
+(
+ID NUMBER(2,0),
+FIRST_NAME VARCHAR(25),
+LAST_NAME VARCHAR(30),
+YEARS_EXPERIENCE NUMBER(5,0)
+);  
+
+INSERT INTO AGENTS VALUES
+(1,'KATE','WHITE',5),
+(2,'MELISSA','BROWN',2),
+(3,'ALEXENDR','MCGREGOR',3),
+(4,'SOFIA','SCOTT',3),
+(5,'STEVEN','BLACK',1),
+(6,'MARIA','SCOTT',1);
+SELECT * FROM AGENTS;
+create or replace table customers(
+ id int not null primary key,
+ first_name varchar(20),
+ last_name varchar(20),
+ email varchar(60) unique
+);
+
+insert into customers (id,first_name,last_name,email)
+values (11,'Xaviera','Lopez','xaviera111111@gmail.com'),
+(12,'Gabriel','Cumberly','gabrie111111@gmail.com'),
+(13,'Elisabeth','Stevens','elisabeth111111@gmail.com'),
+(14,'Oprah','Winfrey','oprah111111@gmail.com'),
+(15,'Ivan','Lee','ivan111111@gmail.com');
+SELECT * FROM customers;
+create table sales(
+id int,
+house_id int,
+c_date date,
+agent_first_name varchar(15),
+agent_last_name varchar(15),
+customer_id int,
+price int);
+
+insert into sales values
+(101,1012,'2021-11-03','Kate','White',14,1200000),
+(102,2134,'2021-12-06','Sophia','Scott',12,950000),
+(103,1015,'2021-12-10','Maria','Scott',13,800000),
+(104,2013,'2021-12-12','Alexand','McGregor',15,1350000),
+(105,2112,'2021-12-12','Alexand','McGregor',15,1450000),
+(106,1010,'2022-01-10','Steven','Black',11,1500000);
+SELECT * FROM sales;
+SELECT
+    a1.first_name as agent1_first_name,
+    a1.last_name as agent1_last_name,
+    a1.YEARS_EXPERIENCE as agent1_experience,
+    a2.first_name as agent2_first_name,
+    a2.last_name as agent2_last_name,
+    a2.YEARS_EXPERIENCE as agent2_experience
+FROM agents a1
+JOIN agents a2
+ON a1.id <> a2.id
+ORDER BY a1.id;
+
+-- example of self join 
+SELECT
+    a1.first_name as agent1_first_name,
+    a1.last_name as agent1_last_name,
+    a1.YEARS_EXPERIENCE as agent1_experience,
+    a2.first_name as agent2_first_name,
+    a2.last_name as agent2_last_name,
+    a2.YEARS_EXPERIENCE as agent2_experience
+FROM agents a1
+JOIN agents a2
+ON a1.id < a2.id
+WHERE a1.YEARS_EXPERIENCE>=3 AND a2.YEARS_EXPERIENCE < 3
+ORDER BY a1.id;
