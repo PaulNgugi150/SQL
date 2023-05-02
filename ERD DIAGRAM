@@ -1,0 +1,23 @@
+use database DEMO_DATABASE;
+create schema ERD;
+use schema ERD;
+
+create table parent (
+    col1 integer not null,
+    col2 integer not null,
+    constraint parentkey_1 primary key (col1, col2) not enforced
+    );
+   
+   
+create table child1 (
+    col_a integer not null,
+    col_b integer not null,
+    constraint childkey_1 foreign key (col_a, col_b) references parent (col1, col2) not enforced
+    );
+   
+   
+create table child2 (
+    col_a integer not null,
+    col_b integer not null,
+    constraint childkey_2 foreign key (col_a, col_b) references parent (col1, col2) not enforced
+    );
